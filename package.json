@@ -6,7 +6,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/vongkim/serverless-nodejs-template"
   },
   "keywords": [
     "nodejs",
@@ -16,9 +16,9 @@
   ],
   "author": "Vong Kim",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/vongkim/serverless-nodejs-template/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/vongkim/serverless-nodejs-template",
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "debug": "^3.1.0"
@@ -31,7 +31,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
-    "serverless-webpack": "^3.1.0",
+    "serverless-webpack": "^4.2.0",
     "webpack": "^3.6.0",
     "webpack-node-externals": "^1.5.4"
   }
