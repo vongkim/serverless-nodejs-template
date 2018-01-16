@@ -1,0 +1,48 @@
+service: ${self:custom.customer}-${self:custom.config.service}
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpackIncludeModules: true
+  config: ${file(./config/application.yml):${self:custom.stage}}
+  application: ${opt:application, self:custom.config.application}
+  customer: ${opt:customer, self:custom.config.customer}
+  stage: ${opt:stage, self:provider.stage}
+  prefix: ${self:custom.stage}-${self:custom.config.service}-${self:custom.customer}
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: ap-southeast-2
+  deploymentBucket: studylink.serverless.deployments
+  versionFunctions: false
+  environment: ${file(./config/env.yml):${self:custom.stage}}
+
+# Additional IAM Role statements
+
+#  iamRoleStatements:
+#    - Effect: Allow
+#      Action:
+#        - s3:GetObject
+#      Resource: arn:aws:s3:::${self:custom.prefix}/*
+
+# API Keys
+
+#  apiKeys:
+#    - ${self:custom.prefix}-api-key
+
+functions:
+  handler:
+    name: ${self:custom.prefix}-handler
+    handler: src/sample/handler.default
+
+# you can add CloudFormation resource templates here
+resources:
+  Description: A sample cloudformation template
+# Enable to provide cloudformation templates
+#  Resources: ${file(./config/resources.yml)}

@@ -1,0 +1,29 @@
+# Cloudformation Resource templates
+
+#
+# Route 53 and API Gateway Resource example
+# Enable if the serverless service contains rest api.
+#
+#CustomDomainGatewayEntry:
+#  Type: AWS::ApiGateway::DomainName
+#  Properties:
+#    CertificateArn: arn:aws:acm:us-east-1:${self:custom.config.account_id}:certificate/uuid
+#    DomainName: ${self:custom.prefix}.example.com
+#
+#CustomDomainDnsCloudFrontDistributionRecord:
+#  Type: AWS::Route53::RecordSet
+#  Properties:
+#    Type: A
+#    Name: ${self:custom.prefix}.example.com
+#    AliasTarget:
+#      DNSName: {Fn::GetAtt: [ CustomDomainGatewayEntry, DistributionDomainName ]}
+#      HostedZoneId: ZONE_ID  # CloudFront
+#    HostedZoneName: example.com.
+#
+#CustomDomainMapping:
+#  Type: AWS::ApiGateway::BasePathMapping
+#  DependsOn: CustomDomainGatewayEntry
+#  Properties:
+#    DomainName: ${self:custom.prefix}.example.com
+#    RestApiId: {Ref: ApiGatewayRestApi}
+#    Stage: ${self:provider.stage}
